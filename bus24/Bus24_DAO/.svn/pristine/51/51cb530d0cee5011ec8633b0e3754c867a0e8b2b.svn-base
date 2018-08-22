@@ -1,0 +1,37 @@
+
+// * Copyright (c) 2017- 2018, HappyBus and/or its affiliates. All rights reserved.
+
+ //* HappyBus PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ 
+package com.bus24.dao;
+
+import com.bus24.beans.Route;
+
+/**
+ * RoutesDAO is used to perform persistence operations on Routes Table
+ * 
+ * @author sahoo
+ * @since 1.0
+ */
+
+public interface RoutesDAO {
+		/**
+	 * this method contain logic searching routes for admin
+	 * 
+	 * @param save_Routes
+	
+	 * @author sahoo
+	 */
+		
+
+		
+
+		public int  addRoute(Route route);
+
+       
+		
+}
+		
+		
+
+

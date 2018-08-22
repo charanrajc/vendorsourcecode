@@ -1,0 +1,74 @@
+<!-- 
+ -->
+<%@page isELIgnored="false"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/styles.css" rel="stylesheet">
+
+<title>Home Page</title>
+</head>
+
+<body>
+	<!--Fixed Top Navbar-->
+	<div class="navbar  navbar-default navbar-top">
+		<div class="container">
+			<div>${status}</div>
+			<a class="navbar-brand" href="#">Bus24</a>
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".navbar-collapse">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="loginUser">Login</a></li>
+					<li class="active"><a href="register">Register</a></li>
+					<li><a href="about.htm">About</a></li>
+					<li class="dropdown"><a href="contact.htm">ContactUs</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!--End Fixed Top Navbar-->
+
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="nav nav-pills">
+					<a href="register" class="list-group-item">Register</a> <a
+						href="searchTravel" class="list-group-item">SearchTravel</a> <a
+						href="loginUser" class="list-group-item">login</a> <a
+						href="registerAgent" class="list-group-item">Agent
+						Registration</a> <a href="searchAgent" class="list-group-item">SearchAgent</a>
+					<a href="searchBusAdmin" class="list-group-item">SearchAdminBus</a>
+					<a href="searchBusPage" class="list-group-item">Search
+						Passenger Buses</a> <a href="amenity" class="list-group-item">Amenity</a>
+				</div>
+			</div>
+			<div class="col-md-8">
+			
+<!-- 			<img alt="" src="images/bus1.jpg" style="" > -->
+			
+			</div>
+		</div>
+
+		<div class="navbar  navbar-inverse navbar-fixed-bottom">
+			<div class="container">
+				<a class="navbar-brand" href="#"><p>&copy:2017 Login App
+						Design by: SATHISH BANDI</p></a>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

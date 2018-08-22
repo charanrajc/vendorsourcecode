@@ -1,0 +1,83 @@
+package com.bus24.service;
+
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.bus24.beans.Response;
+import com.bus24.beans.Route;
+import com.bus24.dao.RoutesDAO;
+import com.bus24.util.JsonUtil;
+import com.bus24.util.Roles;
+import com.bus24.util.StatusUtil;
+
+
+@Service
+public class RoutesServiceImpl implements RoutesService {
+
+	private static Logger logger = Logger.getLogger(RoutesServiceImpl.class);
+	@Autowired
+	private RoutesDAO routesDAO;
+	@Autowired
+	private UserAuthenticationService userAuthenticationService;
+
+	// to search the routes by travel admin and super admin
+
+
+	public String addRoute(String json, String userRole, Long userId, String token) {
+		// creating response object and defining default values
+		Response response = new Response();
+		response.setStatus(StatusUtil.STATUS_FAILURE);
+		response.setMessage("unable to process, plz try again with valid inputs");
+
+		logger.info("entered into routesservice.addroute()");
+
+		// Business Logic
+
+		try {
+			if (userAuthenticationService.isAuthenticated(userId, token)) {
+				logger.info("entered into outer if");
+
+				
+				if (userRole.equals(Roles.ROLE_SUPER_ADMIN)
+						|| userRole.equals(Roles .ROLE_TRAVEL_ADMIN)) {
+					logger.info("entered into outer if");
+					
+					// converting json into domain object
+					Route route = JsonUtil.convertJsonToJava(json, Route.class);
+
+					// calling DAO layer
+					Integer count = routesDAO.addRoute(route);
+					if (count > 0 || count != null) {
+						response.setMessage("added successfully");
+						response.setStatus(StatusUtil.STATUS_SUCCESS);
+					} else
+						response.setMessage("unable to add");
+
+				} else {
+					logger.info("entered into inner else");
+					response.setMessage("you are not adimin, please check your userName and PassWord");
+
+				} // inner if-else
+
+			} else {// Actually no need of writing this else
+				logger.info("entered into inner else");
+				// write proper msg in response object
+				// for not authenticated user
+				response.setMessage("Authentication Failed, please login again");
+			} // outer if- else
+		} catch (UserAuthenticationException e) {
+			logger.info("Exception occured while Authentication of userId and token");
+			response.setMessage("Unable to process");
+		}
+
+		return JsonUtil.convertJavaToJson(response);
+	}
+
+
+
+	
+
+
+}

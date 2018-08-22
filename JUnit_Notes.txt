@@ -1,0 +1,153 @@
+         JUnit 4.X
+Annotations:-
+------------
+@Test
+@Test(timeout=200)
+@Before 
+@After
+@BeforeClass
+@AfterClass
+@RunWith(__.class)
+@SuitClasses({ .class,..})
+-------------------------
+Assert(c)(org.junit):-
+This class is used to check
+assert Operations. It means
+"check is expected one correct or not?".
+(What are we expecting is 
+received or nor?)
+->To check this it provides assertXXX()
+methods.All these methods are 
+static methods.
+**)assert Methods:-
+--------------------
+assertEquals("exp", "original");
+assertEquals("MSG","exp", "org");
+assertNotEquals("exp", "org");
+assertNotEquals("MSG","exp", "org");
+assertTrue(5>(8+9)/5)
+ (boolean condition)
+assertTrue("Seems False..",5>(8+9)/5);
+assertFalse(5>(8+9)/5);
+assertFalse("Might be True",5>(8+9)/5);
+fail();fail("Falied method test");
+assertSame(ob1, ob2);
+assertSame("not same..",ob1, ob2);
+assertNotSame(ob1, ob2);
+assertNotSame("same..",ob1, ob2);
+
+***) here assert=Expected 
+assertSame checks hashCodes, not data.
+assertEquals checks data.
+
+@Before:This annotation executes
+          method before evry test starts.
+@After :This annotation executes
+         method After evry test ends.
+@Test  :This annotation executes 
+          test methods
+@BeforeClass: It executes method one
+    time before all tests are executed
+@AfterClass : It executes method one
+      time after all test are finished
+@Test(timeout=long): It takes long
+   value for timeout check in millSec
+**)Types of classes in JUnit:-
+-------------------------------
+i)JUnit Test class
+ii)JUnit Test Suite
+i)JUnit Test class: This class is used
+to create a Test program over any
+module or concept to check that is 
+working fine or not?
+ii)JUnit Test Suite: In application
+we can define multiple Test classes,
+to run all classes at a time, we need
+to define Test Suite.
+Annotations used to define Suite are :
+@RunWith(Suite.class)
+@SuiteClasses({TestA.class,TestB.class})
+*)Naming convensions:-
+->Every Test class should be prefix
+with "Test" ex: TestSample,TestA etc..
+->Every Test Suite should be suffix
+with "Tests" ex: AllTests, LoginTests
+  LocationTests etc..
+**)Create Test classes and Suites:
+i)Test class:-
+=>src(or src/test/java)
+=>right click =>new => other
+=> serach with JUnit Test class
+=> choose option Test class
+=> select "new JUnit 4.x" version
+=> enter name Ex: TestSample =>finish
+ex:
+public class TestSample {
+ @BeforeClass
+ public void beforeAll(){
+  sysout("Before All...");
+ }
+ @Before
+ public void beforeTest(){
+  sysout("Before Test..");
+ }
+ @After
+ public void afterTest(){
+  sysout("After Test..");
+ }
+ @AfterClass
+ public void afterAll(){
+  sysout("After All..");
+ }
+ @Test
+ public void testOne(){
+  sysout("Test one..");
+ }
+ @Test(timeout=500) //milliSec
+ public void testTwo(){
+  sysout("Test two..");
+ }
+}
+=>Right click =>Run As=>JUnit Test
+o/p:
+ Before All..
+ Before Test ..
+ Test one..
+ After Test ..
+ Before Test ..
+ Test two ..
+ After Test ..
+ After All ..
+ii)Create a Test suite:-
+=>src=>right click=>new =>other
+=>serach with JUnit Test Suite
+=> choose TestSuite =>next
+=>select Test classes to create suite
+=> Enter Suite Name Ex: AllTests
+=>finish
+ex:
+@RunWith(Suite.class)
+@SuiteClasses({ TestSample.class, 
+    TestTwo.class })
+public class AllTests {}
+========
+Method Execution Order:-
+Junit By Default takes care of
+executing methods in its own order
+(DEFAULT) it can be deterministic,
+but not predictable(no 100% confirmation)
+
+JUnit also supports JVM Method Sorting
+(MethodSorters.JVM) or we can go for
+method name sorting as (MethodSorters.
+NAME_ASCENDING)
+
+Example:-
+@FixMethodOrder(MethodSorters
+       .NAME_ASCENDING)
+public class TestSample {
+  ....// @Test
+}
+
+
+

@@ -1,0 +1,171 @@
+package com.bus24.dao;
+
+import java.sql.ResultSet;
+
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.bus24.beans.Route;
+
+import com.bus24.beans.SearchedBooking;
+import com.bus24.dao.util.SQLConstants;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class BookingDAOImpl implements BookingDAO {
+	@Autowired
+	private JdbcTemplate JdbcTemplate;
+
+	@Override
+	public Route bordingPoints(Integer routeId) {
+		final Route route = new Route();
+		JdbcTemplate.queryForObject(SQLConstants.SQL_BOOKING_RETRIEVE_BOARDING_DROPPING, new RowMapper<Route>() {
+			public Route mapRow(ResultSet rs, int rowNum) throws SQLException {
+				route.setBoardingPoints(rs.getString(1));
+				route.setDroppingPoints(rs.getString(2));
+				route.setPrice(rs.getDouble(3));
+				return route;
+			}
+		}, routeId);
+
+		return route;
+	}
+
+	/**
+	 * This Method Contain Logic For Getting All Bookings Of All the Travels By SuperAdmin
+	 * 
+	 * @return List<searchedBooking>
+	 * @author Sindhu 
+	 */
+
+	@Override
+	public List<SearchedBooking> searchBookings() {
+		final SearchedBooking searchedBooking = new SearchedBooking();
+
+		return JdbcTemplate.query(SQLConstants.SQL_SEARCH_BOOKINGS_BY_ALL_TRAVELS, new RowMapper<SearchedBooking>() {
+			public SearchedBooking mapRow(ResultSet rs, int rowNum) throws SQLException {
+				searchedBooking.setBookingId(rs.getInt(1));
+				searchedBooking.setBookingDate(rs.getDate(2));
+				searchedBooking.setTraveID(rs.getInt(3));
+				searchedBooking.setTravelName(rs.getString(4));
+				searchedBooking.setNoOfPassengers(rs.getInt(5));
+				searchedBooking.setSourec(rs.getString(6));
+				searchedBooking.setDestination(rs.getString(7));
+				searchedBooking.setDistance(rs.getInt(8));
+				searchedBooking.setArrivalTime(rs.getDate(9));
+				searchedBooking.setDepatureTime(rs.getDate(10));
+				searchedBooking.setDateOfJourney(rs.getDate(11));
+				searchedBooking.setFinalFare(rs.getDouble(12));
+				
+				
+				
+				return searchedBooking;
+			}
+		});
+
+	}
+	/**
+	 * This Method Contains Logic For Getting All Bookings From Specific Travel
+	 * @param travel_id
+	 * @return List<searchedBooking>
+	 * @author Sindhu 
+	 */
+
+	@Override
+	public List<SearchedBooking> searchBookings(Integer travelId) {
+		final SearchedBooking searchedBooking = new SearchedBooking();
+
+		return JdbcTemplate.query(SQLConstants.SQL_SEARCH_BOOKINGS_BY_TRAVEL_ID, new RowMapper<SearchedBooking>() {
+			public SearchedBooking mapRow(ResultSet rs, int rowNum) throws SQLException {
+				searchedBooking.setBookingId(rs.getInt(1));
+				searchedBooking.setBookingDate(rs.getDate(2));
+				searchedBooking.setTraveID(rs.getInt(3));
+				searchedBooking.setTravelName(rs.getString(4));
+				searchedBooking.setNoOfPassengers(rs.getInt(5));
+				searchedBooking.setSourec(rs.getString(6));
+				searchedBooking.setDestination(rs.getString(7));
+				searchedBooking.setDistance(rs.getInt(8));
+				searchedBooking.setArrivalTime(rs.getDate(9));
+				searchedBooking.setDepatureTime(rs.getDate(10));
+				searchedBooking.setDateOfJourney(rs.getDate(11));
+				searchedBooking.setFinalFare(rs.getDouble(12));
+				
+				
+				
+				return searchedBooking;
+			}
+		},travelId);
+
+	}
+	/**
+	 * This Method Contain Logic For Getting All Bookings By FromDate  and ToDate
+	 * @param fromDate,toDate
+	 * @return List<searchedBooking>
+	 * @author Sindhu And Pavani
+	 */
+	@Override
+	public List<SearchedBooking> searchBookings(Date from, Date to) {
+		final SearchedBooking searchedBooking = new SearchedBooking();
+
+		return JdbcTemplate.query(SQLConstants.SQL_SEARCH_BOOKINGS_BY_USING_FROM_TO_DATE, new RowMapper<SearchedBooking>() {
+			public SearchedBooking mapRow(ResultSet rs, int rowNum) throws SQLException {
+				searchedBooking.setBookingId(rs.getInt(1));
+				searchedBooking.setBookingDate(rs.getDate(2));
+				searchedBooking.setTraveID(rs.getInt(3));
+				searchedBooking.setTravelName(rs.getString(4));
+				searchedBooking.setNoOfPassengers(rs.getInt(5));
+				searchedBooking.setSourec(rs.getString(6));
+				searchedBooking.setDestination(rs.getString(7));
+				searchedBooking.setDistance(rs.getInt(8));
+				searchedBooking.setArrivalTime(rs.getDate(9));
+				searchedBooking.setDepatureTime(rs.getDate(10));
+				searchedBooking.setDateOfJourney(rs.getDate(11));
+				searchedBooking.setFinalFare(rs.getDouble(12));
+				
+				
+				
+				return searchedBooking;
+			}
+		},from,to);
+
+	}
+	/**
+	 * This Method Contain Logic For Getting All Bookings By Specific TravelId ,FromDate  and ToDate
+	 * @param travelID,fromDate,toDate
+	 * @return List<searchedBooking>
+	 * @author Sindhu And Pavani
+	 */
+
+	@Override
+	public List<SearchedBooking> searchBookings(Integer travelId, Date from, Date to) {
+		final SearchedBooking searchedBooking = new SearchedBooking();
+
+		return JdbcTemplate.query(SQLConstants.SQL_SEARCH_BOOKINGS_BY_USING_TRAVEL_ID_FROM_AND_TO_DATE, new RowMapper<SearchedBooking>() {
+			public SearchedBooking mapRow(ResultSet rs, int rowNum) throws SQLException {
+				searchedBooking.setBookingId(rs.getInt(1));
+				searchedBooking.setBookingDate(rs.getDate(2));
+				searchedBooking.setTraveID(rs.getInt(3));
+				searchedBooking.setTravelName(rs.getString(4));
+				searchedBooking.setNoOfPassengers(rs.getInt(5));
+				searchedBooking.setSourec(rs.getString(6));
+				searchedBooking.setDestination(rs.getString(7));
+				searchedBooking.setDistance(rs.getInt(8));
+				searchedBooking.setArrivalTime(rs.getDate(9));
+				searchedBooking.setDepatureTime(rs.getDate(10));
+				searchedBooking.setDateOfJourney(rs.getDate(11));
+				searchedBooking.setFinalFare(rs.getDouble(12));
+				
+				
+				
+				return searchedBooking;
+			}
+		},travelId,from,to);
+
+}
+
+}

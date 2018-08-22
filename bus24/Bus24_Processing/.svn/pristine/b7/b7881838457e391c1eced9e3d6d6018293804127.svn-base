@@ -1,0 +1,9 @@
+package com.bus24.service;
+
+public interface BookingService {
+	public String boardingPoints(String routeId);
+	public String searchBookings();
+	public String searchBookings(Integer travelId);
+	public String searchBookings(String fromDate,String toDate);
+	public String searchBookings(String travelId,String fromDate,String toDate);
+}

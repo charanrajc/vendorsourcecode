@@ -1,0 +1,37 @@
+/* Copyright (c) 2017, 2018, Bus24 and/or its affiliates. All rights reserved.
+ * Bus24 PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+*/
+package com.bus24.beans;
+
+import java.util.Date;
+
+/**
+ * This class hold the searched buses information passenger send across the
+ * network
+ * 
+ * @author Mulayam
+ */
+public class SearchedBus {
+
+	private Integer busId;
+	private Integer noOfSeats;
+	private Integer noOfAvaibleSeats;
+	private Integer routeId;
+	private String source;
+	private String destination;
+
+	private Date departureTime;
+	private Date arrivalTime;
+
+	private Integer distance;
+	private String boradingPoints;
+	private String dropingPoints;
+
+	private String via;
+	private Integer price;
+	private String busType;
+	private String busModel;
+	private String layoutModel;
+	private String layoutDescription;
+
+}

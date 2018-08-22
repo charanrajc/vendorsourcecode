@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller="search_travel_controller">
+<head>
+    <script src="js/angular.js"></script> 
+    <!-- Bootstrap core CSS -->
+<link href="webjars/bootstrap/3.3.5/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="webjars/bootstrap/3.3.5/css/bootstrap.theme.min.css"
+	rel="stylesheet">
+	</head>
+<body>
+    <div class="container">
+    <header class="page-header">
+		<ul class="nav nav-pills  pull-right">
+			<li class="active"><a href="/Bus24/">Home</a></li>
+			<li class="active"><a href="/Bus24/about/">About</a></li>
+			<li class="active"><a href="contact.htm">ContactUs</a></li>
+		</ul>
+		<h2>Search Travel Page</h2>
+		</header>
+ <form ng-controller="search_travel_controller" class="form-horizontal"> 
+  <div class="form-group">
+    <label for="exampleInputTravelName" class="col-sm-2 control-label">Enter Travel Name</label>
+    <div class="col-sm-5">
+      <input type="text"  ng-model="travelName" class="form-control" id="exampleInputTravelName" placeholder="TravelName">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="exampleInputCity" class="col-sm-2 control-label">Enter City</label>
+    <div class="col-sm-5">
+      <input type="text" ng-model="city" class="form-control" id="exampleInputCity" placeholder="City Name">
+    </div>
+  </div>
+ <div class="row">
+  <div class="col-sm-offset-4 com-sm-10">
+    <button type="button" class="btn btn-success btn-lg" ng-click="searchTravel(travelName,city)" type="submit" >Search</button>
+  </div>
+  </div>
+  </div>
+ </form>
+ <hr>
+		<footer>
+		<p align="center">&copy:2017 Search Travel Page Design by: Eshwar</p>
+		</footer>
+</div>
+    
+    <script>
+        var app=angular.module("app",[]);
+        app.controller("search_travel_controller",search_travel_controller);
+        function search_travel_controller($scope,$window,$http) {
+           $scope.searchTravel=function(travelName,cityName){
+        	   $window.alert(travelName+"   "+cityName);
+        	   $http({
+   				method : "post",
+   				url : "/Bus24/searchTravel",
+   				params : {
+   					"travelName" : travelName,
+   					"city" : cityName
+   			    }
+   			}).then(function(result) {
+   				$window.alert("success");
+   				$window.alert(result.data);
+       			
+   			}, function(result) {
+   				$window.alert("fail");
+   				$window.alert(result.data);
+   			});
+           }
+        }
+    </script>
+    </body>	
+</html>

@@ -1,0 +1,10 @@
+package com.bus24.beans;
+
+/**
+ * 
+ * @author Pavani & Sindhu
+ *
+ */
+public class SeachedBooking {
+
+}

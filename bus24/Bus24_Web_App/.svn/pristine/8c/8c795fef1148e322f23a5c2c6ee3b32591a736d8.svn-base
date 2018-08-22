@@ -1,0 +1,46 @@
+/*
+ * Copyright (c) 2017, 2018, Bus24 and/or its affiliates. All rights reserved.
+ * Bus24 PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+*/
+
+package com.bus24.web.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.bus24.web.service.BusService;
+
+/**
+ * 
+ * @author mulayam
+ * @version 1.0
+ */
+@Controller
+public class BusController {
+
+	@Autowired
+	private BusService busService;
+
+	@GetMapping("/searchBusPage")
+	public String searchBusPage() {
+		return "searchPassengerBus";
+	}
+	@GetMapping("/searchBus")
+	public String searchBusList() {
+		return "searchPassengerBus";
+	}
+
+	@GetMapping("/searchBusAdmin")
+	public String showSearchBusForAdminPage() {
+		return "searchBusAdmin";
+	}
+
+	@GetMapping("/searchBusListAdmin/{travelId}")
+	@ResponseBody
+	public String getAllBusListByTravelId(@PathVariable("travelId") Integer travelId) {
+		return busService.getAllBusListByTravelId(travelId);
+	}
+}

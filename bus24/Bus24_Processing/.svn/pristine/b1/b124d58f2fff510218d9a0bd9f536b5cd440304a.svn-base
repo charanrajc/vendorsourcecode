@@ -1,0 +1,59 @@
+package com.bus24.service;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
+
+import com.bus24.beans.Response;
+import com.bus24.beans.Route;
+import com.bus24.dao.BookingDAO;
+import com.bus24.util.JsonUtil;
+import com.bus24.util.StatusUtil;
+
+@Service
+public class BookingServiceImpl implements BookingService {
+	private static Logger logger = Logger.getLogger(BookingServiceImpl.class);
+	@Autowired
+	private BookingDAO bookingDAO;
+
+	public String boardingPoints(String jsonRouteId) {
+		String jsonResponse = "";
+		logger.info("Entered into Showmyprofile : " + jsonRouteId);
+
+		Response response = new Response();
+		response.setStatus(StatusUtil.STATUS_FAILURE);
+		response.setMessage("Registration is Failure!Please Try Again");
+
+		try {// handle exceptions
+			Route route = JsonUtil.convertJsonToJava(jsonRouteId, Route.class);
+			Integer routeId = route.getRouteId();
+			route = bookingDAO.bordingPoints(routeId);
+			if (route != null) {
+				jsonResponse = JsonUtil.convertJavaToJson(route);
+				response.setMessage("Boarding points sent");
+				response.setStatus(StatusUtil.STATUS_SUCCESS);
+				response.setData(jsonResponse);
+				return jsonResponse;
+			}
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			response.setStatus(StatusUtil.STATUS_FAILURE);
+			response.setMessage("Unable to process!Please Try Again");
+			logger.error("Exception Occured while User Login ::" + e.getMessage());
+
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+			response.setStatus(StatusUtil.STATUS_FAILURE);
+			response.setMessage("Unable to process!Please Try Again");
+			logger.error("Exception Occured while User Login ::" + e.getMessage());
+
+		}
+
+		return jsonResponse;
+
+	}
+
+}

@@ -1,0 +1,47 @@
+/**
+ * This file provide functionality to search buses for passenger *
+ * 
+ * @author mulayam
+ */
+
+var searchBusModule = angular.module("searchBusModule", []);
+searchBusModule.controller("searchBusController", function($scope, $http,
+		$window, $log) {
+	$scope.searchBus = function() {
+		var from = $scope.from;
+		var to = $scope.to;
+		var journeyDate = $scope.journeyDate;
+		if (angular.isUndefined(from)) {
+			alert("Source required");
+
+			return;
+		} else if (angular.isUndefined(to)) {
+			alert("Destination required");
+
+			return;
+		} else if (angular.isUndefined(journeyDate)) {
+			alert("date required");
+
+			return;
+		}
+		$http({
+			method : "get",
+			url : "/Bus24/searchBus/" + from + "/" + to + "/" + journeyDate,
+		}).then(function(result) {
+			$log.info(result);
+			$scope.busList = angular.fromJson(result.data.data);
+			$log.info($scope.busList);
+
+		}, function(result) {
+			$window.alert("failed");
+		});
+
+	}
+	$scope.show = function() {
+		if ($scope.isbdVisible) {
+			$scope.isbdVisible = false;
+		} else {
+			$scope.isbdVisible = true;
+		}
+	}
+});

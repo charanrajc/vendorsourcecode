@@ -1,0 +1,28 @@
+<%@page isELIgnored="false" %>
+<html>
+<head>
+<link type="text/css" href="css/bootstrap.css" rel="stylesheet" />
+
+</head>
+<body>
+<h2>Passenger Dashboard</h2>
+welcome , ${userName}
+
+<a href="logoutUser">Logout</a>
+</body>
+<%
+response.setHeader("Cache-Control","no-cache"); //HTTP 1.1 
+response.setHeader("Pragma","no-cache"); //HTTP 1.0 
+response.setDateHeader ("Expires", 0); //prevents caching at the proxy server  
+response.setHeader("Cache-Control","no-store"); //Directs caches not to store 
+
+if(session!=null && 
+session.getAttribute("userId")!=null){
+	
+}else{
+
+	response.setHeader("location","loginUser");
+	response.setStatus(301);
+}
+%>
+</html>

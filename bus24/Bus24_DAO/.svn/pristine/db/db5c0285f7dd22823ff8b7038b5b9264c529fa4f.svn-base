@@ -1,0 +1,25 @@
+package com.bus24.dao;
+
+import java.util.Date;
+import java.util.List;
+
+import com.bus24.beans.Route;
+import com.bus24.beans.SeachedBooking;
+
+public interface BookingDAO {
+	public Route bordingPoints(Integer routeId);
+	
+	/**
+	 * 
+	 * @author Pavani & Sindhu
+	 *
+	 */
+	
+	public List<SeachedBooking> getBookings();
+	public List<SeachedBooking> getBookings(Integer travelId);
+	public List<SeachedBooking> getBookings(Date from,Date to);
+	public List<SeachedBooking> getBookings(Integer travelId,Date from,Date to);
+	
+	
+	
+}

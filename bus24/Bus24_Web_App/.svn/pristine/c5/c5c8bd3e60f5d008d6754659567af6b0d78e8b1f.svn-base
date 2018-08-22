@@ -1,0 +1,26 @@
+.busRowCard {
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+	height: 100px;
+	padding: 20px;
+	font-size: 16px;
+}
+
+.busRowCard:hover {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.navbar-default {
+	/* 	background-color:#ef2929; */
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.navbar-default active {
+	color: #00f;
+}
+
+body {
+	padding: 0px;
+	margin: 0px;
+	background-color: #eeeeef;
+}

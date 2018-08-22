@@ -1,0 +1,102 @@
+package com.bus24.web.service;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
+
+import com.bus24.beans.Response;
+import com.bus24.beans.User;
+import com.bus24.util.JsonUtil;
+import com.bus24.util.StatusUtil;
+
+@Service
+public class UserServiceImpl implements UserService {
+	private static Logger logger = Logger.getLogger(UserServiceImpl.class);
+	@Autowired
+	private RestTemplate restTemplate;
+
+	@Override
+	public String registerPassenger(User user) {
+		String jsonResponse = "{\"status\":\"FAILURE\",\"message\":\"Your Registration is Failure!Please Try Again.\"}";
+		String jsonUser = JsonUtil.convertJavaToJson(user);
+		logger.info("Entered into registerPassenger :: " + jsonUser);
+
+		String REST_REGISTER_USER = "http://localhost:8081/Bus24Webservice/user/registerPassenger";
+		try {
+			jsonResponse = restTemplate.postForObject(REST_REGISTER_USER, jsonUser, String.class);
+		} catch (RestClientException re) {
+			logger.error("Exception occured while  registerPassenger :: " + re);
+
+			jsonResponse = "{\"status\":\"FAILURE\",\"message\":\"Unable to process your request!please try again.\"}";
+		}
+		logger.info("Response from registerPassenger :: " + jsonResponse);
+
+		return jsonResponse;
+	}
+
+	@Override
+	public String validateOtp(String jsonOtp) {
+		String jsonResponse = "{\"status\":\"FAILURE\",\"message\":\"Unable To Process !Please Try Again.\"}";
+
+		logger.info("Entered into validateOtp :: " + jsonOtp);
+
+		String REST_VALIDATE_OTP = "http://localhost:8081/Bus24Webservice/user/validateOtp";
+		try {
+			jsonResponse = restTemplate.postForObject(REST_VALIDATE_OTP, jsonOtp, String.class);
+		} catch (RestClientException re) {
+			logger.error("Exception occured while validating OTP :: " + re);
+
+			jsonResponse = "{\"status\":\"FAILURE\",\"message\":\"Unable to process your request!please try again.\"}";
+		}
+		logger.info("Response from validateOtp :: " + jsonResponse);
+
+		return jsonResponse;
+	}
+
+	@Override
+	public String resendOtp(String jsonOtp) {
+		String jsonResponse = "{\"status\":\"FAILURE\",\"message\":\"Unable To Process !Please Try Again.\"}";
+
+		logger.info("Entered into resendOtp :: " + jsonOtp);
+
+		String REST_VALIDATE_OTP = "http://localhost:8081/Bus24Webservice/user/resendOtp";
+		try {
+			jsonResponse = restTemplate.postForObject(REST_VALIDATE_OTP, jsonOtp, String.class);
+		} catch (RestClientException re) {
+			logger.error("Exception occured while resending OTP :: " + re);
+
+			jsonResponse = "{\"status\":\"FAILURE\",\"message\":\"Unable to process your request!please try again.\"}";
+		}
+		logger.info("Response from resendOtp :: " + jsonResponse);
+
+		return jsonResponse;
+	}
+
+	@Override
+	public Response loginUser(User user) {
+		logger.info("Entered into loginUser :: " +user.getUserName()+" "+user.getPassword());
+
+		Response response=new Response();
+		 response.setStatus(StatusUtil.STATUS_FAILURE);
+		 response.setMessage("Unable to Process your Request !Please Try Again.");
+  try{
+		String jsonUser=JsonUtil.convertJavaToJson(user);
+	String REST_LOGIN_USER = "http://localhost:8081/Bus24Webservice/user/loginUser";
+String jsonResponse=restTemplate.postForObject(REST_LOGIN_USER,jsonUser,String.class);
+logger.info("response of loginUser :: " +jsonResponse);
+ 
+response=JsonUtil.convertJsonToJava(jsonResponse,Response.class);		
+  }catch(RestClientException re){
+		 response.setStatus(StatusUtil.STATUS_FAILURE);
+		 response.setMessage("Unable to Process your Request !Please Try Again.");  
+		 logger.error("Exception occured while login :: " +re.getMessage());
+}
+   return response;
+	}
+}
+
+
+
+

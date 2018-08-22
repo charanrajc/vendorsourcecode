@@ -1,0 +1,66 @@
+
+<html>
+<title>Login Page</title>
+</head>
+<body>
+<h1>Login Page</h1><hr>
+
+<div class="container">
+ <form  class="form-horizontal" action="loginUser" method="post"> 
+  <div class="form-group">
+    <label for="exampleInputUname" class="col-sm-2 control-label">UserName</label>
+    <div class="col-sm-5">
+      <input type="text"  class="form-control" name="userName" id="userName" placeholder="userName">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="exampleInputPassword1" class="col-sm-2 control-label">Password</label>
+    <div class="col-sm-5">
+      <input type="password" name="password" id="password" class="form-control"  placeholder="Password">
+    </div>
+  </div>
+ <div class="row">
+  <div class="col-sm-offset-3 com-sm-10">
+    <input type="submit" value="Login"/>
+    <button type="button" class="btn btn-success btn-lg" ng-click="forgetPassword()"type="submit" >ForgetPassword?</button>
+  </div>
+  </div> </form>
+  </div>
+
+
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<!-- AngularJs -->
+<script src="js/angular.js"></script>
+<!-- Bootstrap core CSS -->
+<link href="webjars/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<link href="webjars/bootstrap/3.3.5/css/bootstrap.theme.min.css" rel="stylesheet">
+	
+	<script >
+	var app = angular.module("app", []);
+	app.controller("user_login_controller", user_login_controller);
+	function user_login_controller($scope,$http,$window) {
+		$scope.loginUser = function(uname,pwd) {
+			$window.alert(uname + "......" + upwd );
+			$http({
+				method : "post",
+				url : "/Bus24/login",
+				params : {
+					"userName" : uname,
+					"password" : pwd,
+			
+				}
+			}).then(function(result) {
+				$window.alert("success");
+				$window.alert(result.data);
+    			
+			}, function(result) {
+				$window.alert("fail");
+				$window.alert(result.data);
+			});
+		}
+	}
+	</script>
+</html>

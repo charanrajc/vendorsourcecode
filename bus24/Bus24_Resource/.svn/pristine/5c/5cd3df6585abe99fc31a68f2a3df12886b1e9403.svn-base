@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="Bus24_Resource-1.0">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="Bus24_Processing-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Bus24_Processing/Bus24_Processing">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Bus24_DAO-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Bus24_DAO/Bus24_DAO">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Bus24_Beans-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Bus24_Beans/Bus24_Beans">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Bus24_Util-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Bus24_Util/Bus24_Util">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Bus24_Integration-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Bus24_Integration/Bus24_Integration">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="Bus24_Resource"/>
+        <property name="java-output-path" value="/Bus24_Resource/target/classes"/>
+    </wb-module>
+</project-modules>

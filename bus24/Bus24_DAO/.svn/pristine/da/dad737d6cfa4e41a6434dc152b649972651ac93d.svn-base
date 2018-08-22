@@ -1,0 +1,104 @@
+package com.bus24.dao;
+//* Copyright (c) 2017- 2018, HappyBus and/or its affiliates. All rights reserved.
+
+import java.sql.Types;
+import java.util.HashMap;
+import java.util.Map;
+
+//* HappyBus PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.SqlOutParameter;
+import org.springframework.jdbc.core.SqlParameter;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
+import org.springframework.stereotype.Repository;
+
+import com.bus24.beans.Route;
+import com.bus24.dao.util.SQLConstants;
+
+
+
+
+
+
+
+
+
+/**
+ * RoutesDAOImpl is used to perform persistence operations on Routes Table
+ * 
+ * @author: sahoo
+ * @since 1.0
+ */
+@Repository
+public class RoutesDAOImpl implements RoutesDAO {
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+
+	@Override
+	public int  addRoute(Route route) {
+	
+	
+	return jdbcTemplate.update(SQLConstants.SQL_ADD_ROUTE,
+				new Object[] { route.getBusId(), route.getTravelId(), route.getSource(), route.getDestination(),
+						route.getDateOfJourney(), route.getVia(), route.getDistance(), route.getDepartureTime(),
+						route.getArrivalTime(), route.getBoardingPoints(), route.getDroppingPoints(), route.getStatus(),
+						route.getServiceNo(), route.getPrice()
+
+				});
+
+	
+	}
+	
+}
+
+	/*
+	
+	
+		SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate);
+		Map<String, Object> map = new HashMap<>();
+		map.put("route_source_in", route.getSource());
+		map.put("rotes_destination_in", route.getDestination());
+		map.put("routes_distance_in", route.getDistance());
+		map.put("routes_departureTime_in", route.getDepartureTime());
+		map.put("routes_arrivalTime_in", route.getDepartureTime());
+		map.put("routes_travelduration_in", route.getTravelDuration());
+	   
+		
+		simpleJdbcCall.declareParameters(new SqlParameter("route_source_in", Types.VARCHAR));
+		simpleJdbcCall.declareParameters(new SqlParameter("routes_distance_in", Types.INTEGER));
+		simpleJdbcCall.declareParameters(new SqlParameter("rotes_destination_in", Types.VARCHAR));
+		simpleJdbcCall.declareParameters(new SqlParameter("routes_departureTime_in", Types.VARCHAR));
+		simpleJdbcCall.declareParameters(new SqlParameter("routes_arrivalTime_in", Types.VARCHAR));
+		simpleJdbcCall.declareParameters(new SqlOutParameter("routes_travelduration_in", Types.INTEGER));
+		simpleJdbcCall.withProcedureName("save_bus");
+		Map<String, Object> outParamsMap = simpleJdbcCall.execute(map);
+		Object busId = outParamsMap.get("bus_id_out");
+		return busId;
+	}*/
+
+	
+
+	/**
+	 * RoutesDAOimpl is used to perform persistence operations on routes table
+	 */
+
+	
+	
+
+
+
+	
+	
+
+
+		
+
+
+	
+
+	
+	
+	
+

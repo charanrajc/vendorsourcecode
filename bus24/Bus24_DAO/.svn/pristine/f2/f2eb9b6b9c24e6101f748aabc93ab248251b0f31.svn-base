@@ -1,0 +1,7 @@
+package com.bus24.dao;
+
+import com.bus24.beans.Route;
+
+public interface BookingDAO {
+	public Route bordingPoints(Integer routeId);
+}

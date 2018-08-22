@@ -1,0 +1,115 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>searchBusBypassenger</title>
+
+<script src="js/angular.js" type="text/javascript"></script>
+<script src="js/search_bus.js" type="text/javascript"></script>
+
+
+<link type="text/css" href="css/bootstrap.css" rel="stylesheet" />
+<link type="text/css" href="css/styles.css" rel="stylesheet" />
+
+
+<style>
+.otherInfo {
+	margin-top: 20px;
+}
+</style>
+
+
+</head>
+<body ng-app="searchBusModule" ng-controller="searchBusController">
+	<div class="container">
+		<p align="center">Search Buses For Passenger</p>
+		<hr />
+		 <form class="form-horizontal">
+			<div class="form-group">
+                  <label for="exampleInputFrom" class="col-sm-2 control-label">From</label>
+                     <div class="col-sm-5">
+                       <input type="text"  ng-model="from" class="form-control" id="exampleInputFrom" placeholder=" From">
+                    </div>
+         </div>
+		<div class="form-group">
+		  <label for="exampleInputTo" class="col-sm-2 control-label">To</label>
+		      <div class="col-sm-5">
+                 <input type="text"  ng-model="to" class="form-control" id="exampleInputTo" placeholder=" To">
+              </div> 
+           </div>
+			<div class="form-group">
+			    <label for="Journey Date" class="col-sm-2 control-label">Journey Date</label>		
+				 <div class="col-sm-5">
+                     <input type="date"  ng-model="journeyDate" class="form-control" id="Journey Date" placeholder=" Journey Date">
+                 </div> 
+            </div>
+				<div class="row">
+                  <div class="col-sm-offset-4 com-sm-10">
+                      <button type="button" class="btn btn-primary btn-md" ng-click="searchBus()" type="submit" >Search</button>
+                </div>
+             </div>
+		</form>
+
+		<table class="table">
+			<tr ng-repeat="bus in busList" class="busRowCard">
+				<td>
+					<p>
+						<b>{{bus.travelName}}</b>
+					</p> {{bus.busModel}} {{bus.busType}} {{bus.layoutModel}}
+					<p class="otherInfo">
+						<a href="#" class="text-danger">Amenities</a>
+					</p>
+
+
+				</td>
+				<td>
+					<p>
+						<b>{{bus.departureTime}}</b> &rarr;{{bus.arrivalTime}}
+					</p>
+					<p>{{bus.distance}} KM</p>
+					<p class="otherInfo">
+						<button class="btn-link" ng-click="show()">
+							<span class="text-danger">Boarding & Dropping Points</span>
+						</button>
+					</p>
+					<div class="row" ng-show="isbdVisible">
+						<div class="col-sm-6">
+							<div>
+								<u style="color: #00f">Boarding Points</u>
+							</div>
+							<div class="col-sm-6"
+								ng-repeat="b in bus.boradingPoints.split(',')">{{b}}</div>
+						</div>
+						<div class="col-sm-6">
+							<div>
+								<u style="color: #00f">Dropping Points</u>
+							</div>
+							<div class="col-sm-6"
+								ng-repeat="b in bus.dropingPoints.split(',')">{{b}}</div>
+						</div>
+					</div>
+				</td>
+
+				<td>
+					<p>
+						<b>Seats</b>
+					</p>
+					<p>{{bus.noOfAvaibleSeats==0 ||bus.noOfAvaibleSeats==null?bus.noOfSeats:bus.noOfAvaibleSeats}}</p>
+
+				</td>
+				<td>
+					<p>
+						<b>INR </b>{{bus.price}}
+					</p>
+					<button class="btn btn-danger">Show Seats</button>
+					<p class="otherInfo">
+						<a href="#" class="text-danger">Cancellation Policy</a>
+					</p>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

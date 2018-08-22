@@ -1,0 +1,57 @@
+.busRowCard {
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+	height: 100px;
+	padding: 20px;
+	font-size: 16px;
+}
+.hb-ddown {
+	position: relative;
+	display: inline-block;
+}
+
+.busRowCard:hover {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.navbar-default {
+	/* 	background-color:#ef2929; */
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.navbar-default active {
+	color: #00f;
+}
+
+body {
+	padding: 0px;
+	margin: 0px;
+	background-color: #;
+}
+  .mojFooter{
+    background-color: #f8f8f8;
+    color: #00a651;
+    padding-top: 0px;
+    border-top: 1px solid #e7e7e7;
+    margin-bottom: 0px;
+}
+
+.bottom-footer{
+    border-top: 1px solid #00a651;
+    margin-top: 0px;
+    padding-top: 7px;
+    color: #00a651;
+
+}
+
+.footer-nav li{
+    display: inline;
+    padding: 0px 40px;
+}
+
+.footer-nav a{
+    color: grey;
+    text-decoration: none;
+}
+
+

@@ -1,0 +1,5 @@
+package com.bus24.service;
+
+public interface BookingService {
+	public String boardingPoints(String routeId);
+}

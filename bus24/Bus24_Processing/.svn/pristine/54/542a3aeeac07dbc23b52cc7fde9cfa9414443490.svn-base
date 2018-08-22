@@ -1,0 +1,56 @@
+/*Copyright (c) 2017, 2018, Bus24 and/or its affiliates. All rights reserved.
+ * Bus24 PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+*/
+package com.bus24.service;
+
+/**
+ * This interface is gather user module requirements
+ * 
+ * @author sathish
+ * @since 1.0
+ */
+public interface UserService {
+	/**
+	 * this method is used to registerPassenger
+	 * 
+	 * @param jsonUser
+	 * @return jsonResponse
+	 */
+	public String registerPassenger(String jsonUser);
+
+	/**
+	 * this method is used to login user
+	 * 
+	 * @param jsonUser
+	 * @return jsonResponse
+	 */
+	public String loginUser(String jsonUser);
+
+	/**
+	 * this method is used to showMyprofile
+	 * 
+	 * @param jsonUser
+	 * @author abhinav
+	 * @return jsonResponse
+	 */
+	public String ShowMyprofile(String jsonUser);
+
+	/**
+	 * this method is used to UPDATE Myprofile
+	 * 
+	 * @author abhinav
+	 * @param jsonUser
+	 * @return jsonResponse
+	 */
+	public String UpdateMyprofile(String jsonUser);
+
+	public String validateOtp(String jsonOtp);
+
+	/**
+	 * This method is used to resend otp
+	 * 
+	 * @return jsonResponse
+	 */
+	public String resendOTP(String jsonUser);
+
+}

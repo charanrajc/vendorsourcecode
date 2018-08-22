@@ -1,0 +1,71 @@
+package com.bus24.web.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.bus24.beans.Response;
+import com.bus24.beans.User;
+import com.bus24.web.service.UserService;
+
+@Controller
+public class UserController {
+	@Autowired
+	private UserService userService;
+
+	@RequestMapping(value = "register", method = RequestMethod.GET)
+	public String showPassengerRegistrationPage() {
+		return "passengerRegistration";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "register", method = RequestMethod.POST)
+	public String registerPassenger(@ModelAttribute User user) {
+		String jsonResponse = userService.registerPassenger(user);
+		return jsonResponse;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "validateOtp", method = RequestMethod.POST)
+	public String validateOtp(@RequestBody String jsonOtp) {
+		String jsonResponse = userService.validateOtp(jsonOtp);
+		return jsonResponse;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "resendOtp", method = RequestMethod.POST)
+	public String resendOtp(@RequestBody String jsonUser) {
+		String jsonResponse = userService.resendOtp(jsonUser);
+		return jsonResponse;
+	}
+	/**this method is used to get the login page
+	 * @author Eshwar
+	 * @version 1.0
+	 */
+	@RequestMapping(value = "login", method = RequestMethod.GET)
+	public String userLogin() {
+		return "login";
+	}
+	
+	@RequestMapping(value="loginUser",method=RequestMethod.POST)
+	public ModelAndView 
+	loginUser(@ModelAttribute User user,HttpServletRequest req){
+		
+   //  Response response=userService.loginUser(user);
+  	//response contain status,message ,data
+      //data is nothing but  userobj(userId,username,token,userRole)
+      
+      return null;
+	}
+}
+
+
+

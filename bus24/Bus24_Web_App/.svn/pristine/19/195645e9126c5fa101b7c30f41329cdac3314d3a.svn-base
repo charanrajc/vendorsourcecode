@@ -1,0 +1,63 @@
+
+/*
+ * Copyright (c) 2017, 2018, Bus24 and/or its affiliates. All rights reserved.
+ * Bus24 PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+*/
+
+package com.bus24.web.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.bus24.beans.Travel;
+import com.bus24.web.service.TravelService;
+
+/**
+ * 
+ * @author mulayam
+ * @version 1.0
+ */
+@Controller
+public class TravelController {
+
+	@Autowired
+	private TravelService travelService;
+
+	/**
+	 * this method get all travel
+	 * @author mulayam
+	 * @return json of travelist
+	 */
+	@GetMapping("getAllTravel")
+	@ResponseBody
+	public String getAllTravel() {
+		return travelService.getAllTravel();
+	}
+	
+	/**this method is used to get the searchTravel page
+	 * @author Eshwar
+	 * @version 1.0
+	 */
+	@RequestMapping(value="searchTravel",method=RequestMethod.GET)
+	public String getSearchPage(){
+		return "search_travel";
+	}
+	/**this method is used to search the Travel 
+	 * @author Eshwar
+	 * @version 1.0
+	 */
+	@ResponseBody
+	@RequestMapping(value="searchTravel",method=RequestMethod.POST)
+	public String searchTravel(@ModelAttribute Travel travel){
+		System.out.println(travel.getTravelName());
+		System.out.println(travel.getCity());
+		//travelService.
+		return null;
+	}
+
+}

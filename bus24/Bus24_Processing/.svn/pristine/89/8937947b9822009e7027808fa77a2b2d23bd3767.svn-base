@@ -1,0 +1,16 @@
+package com.bus24.service;
+
+/**
+ * 
+ * @author Rakhi
+ *
+ */
+public interface InsuranceService {
+
+	public String addNewInsuranceCompany(String jsonInsurance);
+
+	public String getAllInsuranceCompany();
+
+	public String getInsuranceCompanyByTravelId(Integer travelId);
+
+}

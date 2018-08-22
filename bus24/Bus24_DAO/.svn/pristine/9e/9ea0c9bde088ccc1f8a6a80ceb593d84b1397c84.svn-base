@@ -1,0 +1,121 @@
+/*
+ * Copyright (c) 2017, 2018, Bus24 and/or its affiliates. All rights reserved.
+ * Bus24 PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+*/
+package com.bus24.dao;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import com.bus24.beans.Amenity;
+import com.bus24.beans.Bus;
+import com.bus24.beans.BusType;
+import com.bus24.beans.SearchedBus;
+import com.bus24.beans.Travel;
+import com.bus24.dao.util.SQLConstants;
+
+/**
+ * This class is the implementation class of BusDAO, implement the persistence
+ * logic on Bus Entity
+ * 
+ * @author Mulayam
+ * @since 1.0
+ */
+@Repository
+public class BusDAOImpl implements BusDAO {
+
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+
+	/**
+	 * This method used to get all amenities of specified busId
+	 * 
+	 * @author mulayam
+	 * @since 1.0
+	 * @param busID
+	 */
+	@Override
+	public List<Amenity> getBusAmenities(Integer busId) {
+
+		// amenity_id,amenity_name
+
+		return jdbcTemplate.query(SQLConstants.SQL_SELECT_AMENITY_BY_BUSID, new RowMapper<Amenity>() {
+			@Override
+			public Amenity mapRow(ResultSet rs, int arg1) throws SQLException {
+				Amenity amenity = new Amenity();
+				amenity.setAmenityId(rs.getInt(1));
+				amenity.setAmenityName(rs.getString(2));
+				return amenity;
+			}
+		}, busId);
+	}
+
+	/**
+	 * 
+	 * Get The list of busses of specific travelId
+	 * 
+	 * @author mulayam
+	 * @param travelId
+	 * @return return list of busses
+	 * @since 1.0
+	 */
+	@Override
+	public List<Bus> searchBusesByTravelId(Integer travelId) {
+
+		return jdbcTemplate.query(SQLConstants.SQL_SELECT_BUS_FOR_ADMIN_BY_TRAVELID, new RowMapper<Bus>() {
+
+			/*
+			 * bus_id,travel_id,reg_no, status, bus_type_name, bus_model,
+			 * layout_model,no_of_seats,layout_type,layout_desc
+			 */
+
+			@Override
+			public Bus mapRow(ResultSet rs, int arg1) throws SQLException {
+
+				Bus bus = new Bus();
+				bus.setBusId(rs.getInt(1));
+
+				Travel travel = new Travel();
+				travel.setTravelId(rs.getInt(2));
+				bus.setTravelId(travel);
+
+				bus.setRegNo(rs.getString(3));
+
+				bus.setStatus(rs.getByte(4));
+
+				BusType busType = new BusType();
+				busType.setTypeName(rs.getString(5));
+				busType.setModel(rs.getString(6));
+				busType.setLayoutModel(rs.getString(7));
+				busType.setNoOfSeats(rs.getInt(8));
+				busType.setLayoutType(rs.getString(9));
+				busType.setLayoutDescription(rs.getString(10));
+
+				bus.setBusType(busType);
+				return bus;
+			}
+		}, travelId);
+	}
+
+	/**
+	 * 	This method is used to search busses for passenger
+	 * @param source
+	 * @param destination
+	 * @param date
+	 * @return {@link List<SearchedBus>}
+	 * @author Mulayam
+	  */
+	@Override
+	public List<SearchedBus> searchBusesForPassenger(String source, String destination, String date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+}
